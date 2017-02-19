@@ -6,10 +6,10 @@ class Board extends Component {
     return(
       <table>
         <tr>
-          <td><BoardColumn boardName='Brainstorming' /></td>
-          <td><BoardColumn boardName='Pending' /></td>
-          <td><BoardColumn boardName='In Progress' /></td>
-          <td><BoardColumn boardName='Completed' /></td>
+          <td><BoardColumn boardName='Brainstorming' columnStyle='alert alert-info'/></td>
+          <td><BoardColumn boardName='Pending' columnStyle='alert alert-warning'/></td>
+          <td><BoardColumn boardName='In Progress' columnStyle='alert alert-danger'/></td>
+          <td><BoardColumn boardName='Completed' columnStyle='alert alert-success'/></td>
         </tr>
       </table>
     );
