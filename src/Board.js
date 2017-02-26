@@ -3,14 +3,27 @@ import BoardColumn from './BoardColumn';
 
 class Board extends Component {
   render() {
+    const boardColumns = [
+      {id: 1, name: 'Brainstorming'},
+      {id: 2, name: 'Pending'},
+      {id: 3, name: 'In Progress'},
+      {id: 4, name: 'Completed'},
+      {id: 5, name: 'Archive'},
+    ];
+
+    const boards = boardColumns.map((board) =>
+      <td key={board.id.toString()} >
+        <BoardColumn key={board.id.toString()} boardName={board.name}/>
+      </td>
+    );
+
     return(
       <table>
-        <tr>
-          <td><BoardColumn boardName='Brainstorming' columnStyle='alert alert-info'/></td>
-          <td><BoardColumn boardName='Pending' columnStyle='alert alert-warning'/></td>
-          <td><BoardColumn boardName='In Progress' columnStyle='alert alert-danger'/></td>
-          <td><BoardColumn boardName='Completed' columnStyle='alert alert-success'/></td>
-        </tr>
+        <tbody>
+          <tr>
+            {boards}
+          </tr>
+        </tbody>
       </table>
     );
   }
