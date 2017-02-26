@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BoardStory from './BoardStory'
 
-class BoardColumn extends Component {
+export default class BoardColumn extends Component {
   constructor(props) {
     super(props);
     this.state = {hidden: false};
@@ -40,5 +40,3 @@ class BoardColumn extends Component {
     );
   }
 }
-
-export default BoardColumn;

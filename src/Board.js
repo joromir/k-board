@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BoardColumn from './BoardColumn';
 
-class Board extends Component {
+export default class Board extends Component {
   render() {
     const boardColumns = [
       {id: 1, name: 'Brainstorming'},
@@ -28,5 +28,3 @@ class Board extends Component {
     );
   }
 }
-
-export default Board;

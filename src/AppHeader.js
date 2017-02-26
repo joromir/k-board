@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Logo from './Logo';
 
-class AppHeader extends Component {
+export default class AppHeader extends Component {
   render() {
     return(
       <div className="App-header">
@@ -10,5 +10,3 @@ class AppHeader extends Component {
     );
   }
 }
-
-export default AppHeader;

@@ -4,7 +4,7 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 import AppHeader from './AppHeader'
 import Board from './Board'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -14,5 +14,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
