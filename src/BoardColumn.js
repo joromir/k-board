@@ -19,24 +19,32 @@ export default class BoardColumn extends Component {
       { id: 1, title: 'Wash dishes' },
       { id: 2, title: 'Do the laundry' },
       { id: 3, title: 'Do your homework' },
-      { id: 4, title: 'Buy wine' }
+      { id: 4, title: 'Buy wine'}
     ];
 
     const boardStories = stories.map((story) =>
       <BoardStory key={story.id.toString()} story={story} />
     );
 
-    return(
-      <div className="BoardColumn">
-        { !this.state.hidden &&
-          <div>
-            <h1 className='alert alert-warning'>{this.props.boardName}</h1>
-            <p onClick={this.change_state}>хиксче</p>
+    // const trashedStories = boardStories.filter((story) =>
+    //   story
+    // );
 
-            <ul>{boardStories}</ul>
-          </div>
-        }
+    const content = <div>
+      <div className="BoardColumn thumbnail">
+        <div className='well'>
+          <a onClick={this.change_state} className='btn btn-danger btn-xs'>delete</a>
+          <h4 className='display-4'>{this.props.boardName}</h4>
+        </div>
+
+        <div className="list-inline">{boardStories}</div>
+{/*         <hr />
+
+        <h5>Trash</h5>
+        <ul className="list-inline">{trashedStories}</ul> */}
       </div>
-    );
+    </div>
+
+    return(!this.state.hidden && content);
   }
 }
