@@ -7,8 +7,8 @@ export default class BoardStory extends Component {
     this.markAsTrash = this.markAsTrash.bind(this);
   }
 
-  markAsTrash(e) {
-    alert('TODO: Should be marked as trash');
+  markAsTrash() {
+    this.props.onChange(this.props.story.id);
   }
 
   render() {

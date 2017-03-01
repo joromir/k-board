@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import BoardColumn from './BoardColumn';
 
 export default class Board extends Component {
-  render() {
-    // TODO: Extract data;
-    const boardColumns = [
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+
+    // TODO: Extract data
+    this.state = {
+      boardColumns:[
       {
         id: 1,
-        name: 'To do',
+        name: 'Tomorrow',
         stories: [
           {id: 1, title: 'Wash dishes', trash: false},
           {id: 2, title: 'Do the laundry', trash: false},
@@ -33,13 +37,37 @@ export default class Board extends Component {
           {id: 2, title: 'Pay the bills', trash: false},
         ]
       }
-    ];
+    ]}
+  }
 
-    const boards = boardColumns.map((board) =>
+  handleChange(columnId, storyId) {
+    // TODO: refactor yucky method;
+    const targetColumn = this.state.boardColumns.filter((column) =>
+      column.id.toString() === columnId.toString()
+    )[0];
+
+    const targetStory = targetColumn.stories.filter((story) =>
+      story.id === storyId
+    )[0];
+
+    const newColumn = {
+      ...targetColumn,
+      ...{stories: [{id: storyId, title: targetStory.title, trash: true}]}
+    }
+
+    this.setState({
+      ...this.state.boardColumns, ...newColumn
+    })
+  }
+
+  render() {
+    const boards = this.state.boardColumns.map((board) =>
       <BoardColumn
         key={board.id.toString()}
+        columnId={board.id}
         boardName={board.name}
-        stories={board.stories}/>
+        stories={board.stories}
+        onChange={this.handleChange}/>
     );
 
     return(

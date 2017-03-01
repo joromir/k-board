@@ -21,8 +21,8 @@ export default class BoardColumn extends Component {
     });
   }
 
-  handleStoryChange(value) {
-    alert('TODO: handleStoryChange');
+  handleStoryChange(storyId) {
+    this.props.onChange(this.props.columnId, storyId);
   }
 
   trashedStories() {
