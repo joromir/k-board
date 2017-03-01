@@ -3,25 +3,22 @@ import React, { Component } from 'react';
 export default class BoardStory extends Component {
   constructor(props) {
     super(props);
-    this.state = {trash: false};
 
     this.markAsTrash = this.markAsTrash.bind(this);
   }
 
-  markAsTrash() {
-    this.setState({trash: true});
+  markAsTrash(e) {
+    alert('TODO: Should be marked as trash');
   }
 
   render() {
-    const presentStory = <a href='#' className="list-group-item">
-      <a onClick={this.markAsTrash} className='btn btn-danger btn-xs'>delete</a>
-      {this.props.story.title}
-    </a>
+    const presentStory = <div>
+      <a href='#' className="list-group-item">
+        {this.props.story.title}<br />
+        <a onClick={this.markAsTrash} className='btn btn-danger btn-xs'>Trash</a>
+      </a>
+    </div>
 
-    if(this.state.trash) {
-      return(null);
-    } else {
-      return(presentStory);
-    }
+    return(presentStory);
   }
 }

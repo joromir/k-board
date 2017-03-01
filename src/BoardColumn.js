@@ -4,44 +4,58 @@ import BoardStory from './BoardStory'
 export default class BoardColumn extends Component {
   constructor(props) {
     super(props);
-    this.state = {hidden: false};
-    this.change_state = this.change_state.bind(this);
+
+    this.state = {
+      hidden: false,
+    };
+
+    this.changeState = this.changeState.bind(this);
+    this.handleStoryChange = this.handleStoryChange.bind(this);
+    this.trashedStories = this.trashedStories.bind(this);
+    this.boardStories = this.boardStories.bind(this);
   }
 
-  change_state() {
+  changeState() {
     this.setState({
       hidden: true
     });
   }
 
+  handleStoryChange(value) {
+    alert('TODO: handleStoryChange');
+  }
+
+  trashedStories() {
+    return(this.props.stories.filter((story) => story.trash === true).map((story) =>
+      <BoardStory
+        key={story.id.toString()}
+        story={story}
+        onChange={this.handleStoryChange}/>
+    ));
+  }
+
+  boardStories() {
+    return(this.props.stories.filter((story) => story.trash === false).map((story) =>
+      <BoardStory
+        key={story.id.toString()}
+        story={story}
+        onChange={this.handleStoryChange}/>
+    ));
+  }
+
   render() {
-    const stories = [
-      { id: 1, title: 'Wash dishes' },
-      { id: 2, title: 'Do the laundry' },
-      { id: 3, title: 'Do your homework' },
-      { id: 4, title: 'Buy wine'}
-    ];
-
-    const boardStories = stories.map((story) =>
-      <BoardStory key={story.id.toString()} story={story} />
-    );
-
-    // const trashedStories = boardStories.filter((story) =>
-    //   story
-    // );
-
-    const content = <div>
+    const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
         <div className='well'>
-          <a onClick={this.change_state} className='btn btn-danger btn-xs'>delete</a>
           <h4 className='display-4'>{this.props.boardName}</h4>
+          <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
         </div>
 
-        <div className="list-inline">{boardStories}</div>
-{/*         <hr />
+        <div className="list-inline">{this.boardStories()}</div>
+        <hr />
 
         <h5>Trash</h5>
-        <ul className="list-inline">{trashedStories}</ul> */}
+        <div className="list-inline">{this.trashedStories()}</div>
       </div>
     </div>
 
