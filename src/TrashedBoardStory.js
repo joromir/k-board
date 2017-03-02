@@ -8,7 +8,7 @@ export default class TrashedBoardStory extends Component {
   }
 
   handleChange() {
-    this.props.onChange();
+    this.props.onChange(this.props.story.id);
   }
 
   render() {

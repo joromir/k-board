@@ -11,6 +11,7 @@ export default class TrashedStories extends Component {
 
     this.trashedStories = this.trashedStories.bind(this);
     this.showTrash = this.showTrash.bind(this);
+    this.handleStoryChange = this.handleStoryChange.bind(this);
   }
 
   trashedStories() {
@@ -28,6 +29,10 @@ export default class TrashedStories extends Component {
         {trashComponents}
       </div>
     );
+  }
+
+  handleStoryChange(storyId) {
+    this.props.onChange(storyId);
   }
 
   showTrash() {

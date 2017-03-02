@@ -28,7 +28,7 @@ export default class BoardColumn extends Component {
   markStoryAsTrash(prevState, storyId) {
     prevState.stories.map(function(story) {
       if(story.id === storyId){
-        story.trash = true
+        story.trash = !story.trash
       }
         return story;
     });
@@ -50,7 +50,7 @@ export default class BoardColumn extends Component {
 
         <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
         <hr />
-        <TrashedStories stories={this.state.stories}/>
+        <TrashedStories stories={this.state.stories} onChange={this.refreshStories}/>
       </div>
     </div>
 
