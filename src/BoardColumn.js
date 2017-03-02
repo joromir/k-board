@@ -62,8 +62,8 @@ export default class BoardColumn extends Component {
         <div className="list-inline">{this.boardStories()}</div>
         <hr />
 
-        <button className='btn btn-info btn-xs' onClick={this.showTrash}>
-          {this.state.trashVisible ? 'Hide': 'Show'} Trash
+        <button className='btn btn-danger' onMouseEnter={this.showTrash} onMouseLeave={this.showTrash}>
+          Trash
         </button>
 
         {this.state.trashVisible && <div className="list-inline">{this.trashedStories()}</div>}
