@@ -18,15 +18,25 @@ export default class BoardColumn extends Component {
     };
     this.changeState = this.changeState.bind(this);
     this.refreshStories = this.refreshStories.bind(this);
+    this.markStoryAsTrash = this.markStoryAsTrash.bind(this);
   }
 
   changeState() {
     this.setState({hidden: true});
   }
 
+  markStoryAsTrash(prevState, storyId) {
+    prevState.stories.map(function(story) {
+      if(story.id === storyId){
+        story.trash = true
+      }
+        return story;
+    });
+  }
+
   refreshStories(storyId) {
     this.setState((prevState, props) =>
-      {stories: []}
+      {stories: this.markStoryAsTrash(prevState, storyId)}
     );
   }
 
