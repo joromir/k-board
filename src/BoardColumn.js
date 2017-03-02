@@ -62,7 +62,7 @@ export default class BoardColumn extends Component {
         <div className="list-inline">{this.boardStories()}</div>
         <hr />
 
-        <button className='btn btn-danger' onMouseEnter={this.showTrash} onMouseLeave={this.showTrash}>
+        <button className='btn btn-danger' onMouseOver={this.showTrash}>
           Trash
         </button>
 
