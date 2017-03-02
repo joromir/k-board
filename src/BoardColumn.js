@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import BoardStory from './BoardStory'
+import TrashedStories from './TrashedStories'
+import ColumnActiveStories from './ColumnActiveStories'
 
 export default class BoardColumn extends Component {
   constructor(props) {
@@ -7,48 +9,25 @@ export default class BoardColumn extends Component {
 
     this.state = {
       hidden: false,
-      trashVisible: false
+      stories: [
+        {id: 1, title: 'Buy notebooks', trash: false},
+        {id: 2, title: 'Wash the car', trash: true},
+        {id: 3, title: 'Buy new charger for the phone', trash: false},
+        {id: 4, title: 'Dust off the furniture', trash: true}
+      ] 
     };
-
     this.changeState = this.changeState.bind(this);
-    this.handleStoryChange = this.handleStoryChange.bind(this);
-    this.trashedStories = this.trashedStories.bind(this);
-    this.boardStories = this.boardStories.bind(this);
-    this.showTrash = this.showTrash.bind(this);
+    this.refreshStories = this.refreshStories.bind(this);
   }
 
   changeState() {
-    this.setState({
-      hidden: true
-    });
+    this.setState({hidden: true});
   }
 
-  handleStoryChange(storyId) {
-    this.props.onChange(this.props.columnId, storyId);
-  }
-
-  trashedStories() {
-    return(this.props.stories.filter((story) => story.trash === true).map((story) =>
-      <BoardStory
-        key={story.id.toString()}
-        story={story}
-        onChange={this.handleStoryChange}/>
-    ));
-  }
-
-  boardStories() {
-    return(this.props.stories.filter((story) => story.trash === false).map((story) =>
-      <BoardStory
-        key={story.id.toString()}
-        story={story}
-        onChange={this.handleStoryChange}/>
-    ));
-  }
-
-  showTrash() {
-    this.setState((prevState, props) => ({
-      trashVisible: !prevState.trashVisible
-    }));
+  refreshStories(storyId) {
+    this.setState((prevState, props) =>
+      {stories: []}
+    );
   }
 
   render() {
@@ -56,17 +35,12 @@ export default class BoardColumn extends Component {
       <div className="BoardColumn thumbnail">
         <div className='well'>
           <h4 className='display-4'>{this.props.boardName}</h4>
-          <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
         </div>
+        <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
 
-        <div className="list-inline">{this.boardStories()}</div>
+        <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
         <hr />
-
-        <button className='btn btn-danger' onMouseOver={this.showTrash}>
-          Trash
-        </button>
-
-        {this.state.trashVisible && <div className="list-inline">{this.trashedStories()}</div>}
+        <TrashedStories stories={this.state.stories}/>
       </div>
     </div>
 
