@@ -39,9 +39,7 @@ export default class TrashedStories extends Component {
   render() {
     return(
       <div>
-        <button className='btn btn-danger'
-                onMouseOver={this.showTrash}
-                onClick={this.showTrash}>Trash</button>
+        <button className='btn btn-danger' onClick={this.showTrash}>Trash</button>
 
          {this.state.trashVisible && this.trashedStories()}
       </div>

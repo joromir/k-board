@@ -15,7 +15,7 @@ export default class BoardStory extends Component {
     const presentStory = <div>
       <a href='#' className="list-group-item">
         {this.props.story.title}<br />
-        <a onClick={this.markAsTrash} className='btn btn-danger btn-xs'>Trash</a>
+        <a onClick={this.markAsTrash} className='btn btn-danger btn-xs'>mark as trash</a>
       </a>
     </div>
 

@@ -45,8 +45,8 @@ export default class BoardColumn extends Component {
       <div className="BoardColumn thumbnail">
         <div className='well'>
           <h4 className='display-4'>{this.props.boardName}</h4>
+          <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
         </div>
-        <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
 
         <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
         <hr />
