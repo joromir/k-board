@@ -6,12 +6,12 @@ export default class Board extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
 
-    // TODO: Extract data
     this.state = {
       boardColumns:[
       {id: 1, name: 'Tomorrow'},
       {id: 2, name: 'Today'},
-      {id: 3, name: 'Completed'}
+      {id: 3, name: 'Completed'},
+      {id: 4, name: 'Archive'}
     ]}
   }
 
@@ -24,8 +24,6 @@ export default class Board extends Component {
       let targetStory = targetColumn.stories.filter((story) =>
         story.id === storyId
       )[0];
-
-      // {title: targetStory.title, id: storyId, trash: true}
     }
 
     this.setState((prevState, props) =>
