@@ -52,12 +52,10 @@ export default class Board extends Component {
 
     const newColumn = {
       ...targetColumn,
-      ...{stories: [{id: storyId, title: targetStory.title, trash: true}]}
+      ...{stories: [{id: storyId * 10, title: targetStory.title, trash: true}]}
     }
 
-    this.setState({
-      ...this.state.boardColumns, ...newColumn
-    })
+    this.setState({ boardColumns: this.state.boardColumns.concat([newColumn])})
   }
 
   render() {

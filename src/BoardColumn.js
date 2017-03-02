@@ -7,12 +7,14 @@ export default class BoardColumn extends Component {
 
     this.state = {
       hidden: false,
+      trashVisible: false
     };
 
     this.changeState = this.changeState.bind(this);
     this.handleStoryChange = this.handleStoryChange.bind(this);
     this.trashedStories = this.trashedStories.bind(this);
     this.boardStories = this.boardStories.bind(this);
+    this.showTrash = this.showTrash.bind(this);
   }
 
   changeState() {
@@ -43,6 +45,12 @@ export default class BoardColumn extends Component {
     ));
   }
 
+  showTrash() {
+    this.setState((prevState, props) => ({
+      trashVisible: !prevState.trashVisible
+    }));
+  }
+
   render() {
     const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
@@ -54,8 +62,11 @@ export default class BoardColumn extends Component {
         <div className="list-inline">{this.boardStories()}</div>
         <hr />
 
-        <h5>Trash</h5>
-        <div className="list-inline">{this.trashedStories()}</div>
+        <button className='btn btn-info btn-xs' onClick={this.showTrash}>
+          {this.state.trashVisible ? 'Hide': 'Show'} Trash
+        </button>
+
+        {this.state.trashVisible && <div className="list-inline">{this.trashedStories()}</div>}
       </div>
     </div>
 
