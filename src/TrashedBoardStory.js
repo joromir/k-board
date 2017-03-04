@@ -14,7 +14,7 @@ export default class TrashedBoardStory extends Component {
   render() {
     return <a className="list-group-item">
       {this.props.story.title}<br />
-      <a className='btn btn-info btn-xs' onClick={this.handleChange}>Restore</a>
+      <a className='btn btn-info btn-block btn-xs' onClick={this.handleChange}>Restore</a>
     </a>;
   }
 }

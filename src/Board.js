@@ -4,46 +4,54 @@ import BoardColumn from './BoardColumn';
 export default class Board extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
 
-    this.state = {
-      boardColumns:[
-      {id: 1, name: 'Tomorrow'},
-      {id: 2, name: 'Today'},
-      {id: 3, name: 'Completed'},
-      {id: 4, name: 'Archive'}
-    ]}
+    this.state = {newColumnName: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.createNewColumn = this.createNewColumn.bind(this);
+    this.inputListener = this.inputListener.bind(this);
+    this.boards = this.boards.bind(this);
   }
 
   handleChange(columnId, storyId) {
-    function updatedColumns(columns) {
-      let targetColumn = columns.filter((boardColumn) =>
-        boardColumn.id === columnId
-      )[0];
-      
-      let targetStory = targetColumn.stories.filter((story) =>
-        story.id === storyId
-      )[0];
-    }
+    alert('TODO: Board handle change');
+  }
 
-    this.setState((prevState, props) =>
-      {boardColumns: updatedColumns(prevState.boardColumns)}
+  createNewColumn(e) {
+    alert('TODO');
+  }
+
+  inputListener(e) {
+    this.setState({newColumnName: e.target.value});
+  }
+
+  boards() {
+    const components = this.props.boardColumns.map((board) =>
+      <BoardColumn key={board.id.toString()}
+                   boardData={board}
+                   onChange={this.handleChange}/>
     );
+    return(components);
   }
 
   render() {
-    const boards = this.state.boardColumns.map((board) =>
-      <BoardColumn
-        key={board.id.toString()}
-        columnId={board.id}
-        boardName={board.name}
-        stories={board.stories}
-        onChange={this.handleChange}/>
-    );
-
     return(
-      <div className='row'>
-        {boards}
+      <div>
+        <div className='row'>
+          <div className='col-lg-12 well'>
+            <form onSubmit={this.createNewColumn}>
+              <input type='text'
+                     onChange={this.inputListener}
+                     placeholder='New board column name'
+                     className='form-control'/>
+
+              <input type='submit'
+                     className='btn btn-danger btn-block'/>
+            </form>
+          </div>
+        </div>
+
+        <div className='row'>{this.boards()}</div>
       </div>
     );
   }

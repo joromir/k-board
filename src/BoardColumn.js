@@ -17,6 +17,7 @@ export default class BoardColumn extends Component {
         {id: 4, title: 'Dust off the furniture', trash: true}
       ] 
     };
+
     this.changeState = this.changeState.bind(this);
     this.refreshStories = this.refreshStories.bind(this);
     this.markStoryAsTrash = this.markStoryAsTrash.bind(this);
@@ -59,7 +60,7 @@ export default class BoardColumn extends Component {
       trash: false
     };
 
-    return(stories.concat([newStory]));
+    return(stories.push(newStory));
   }
 
   handleSubmit(event) {
@@ -74,9 +75,10 @@ export default class BoardColumn extends Component {
     const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
         <div className='well'>
-          <h4 className='display-4'>{this.props.boardName}</h4>
-          <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
-          <p>{this.state.newStoryData}</p>
+          <h4 className='display-4'>{this.props.boardData.name}</h4>
+          <a onClick={this.changeState} className='btn btn-danger btn-xs btn-block'>
+            delete column
+          </a>
           <form onSubmit={this.handleSubmit}>
             <label>
               Add new:
@@ -85,7 +87,7 @@ export default class BoardColumn extends Component {
                      className='form-control'
                      onChange={this.addNewStory}/>
             </label>
-            <input type='submit' value='Submit' className='btn btn-info btn-xs'/>
+            <input type='submit' value='Submit' className='btn btn-info btn-xs btn-block'/>
           </form>
         </div>
 

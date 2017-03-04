@@ -46,7 +46,7 @@ export default class TrashedStories extends Component {
   determineButton() {
     var trashedItemsLength = this.props.stories.filter((story) => story.trash === true).length;
 
-    var klass = 'btn btn-danger';
+    var klass = 'btn btn-danger btn-block';
 
     return(
       <button className={trashedItemsLength === 0 ? klass + ' disabled' : klass}

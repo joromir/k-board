@@ -6,10 +6,16 @@ import Board from './Board'
 
 export default class App extends Component {
   render() {
+    var boards = [
+      {id: 1, name: 'Tomorrow'},
+      {id: 2, name: 'Today'},
+      {id: 3, name: 'Completed'},
+      {id: 4, name: 'Archive'}
+    ];
+
     return (
       <div className="App">
-        <AppHeader />
-        <Board />
+        <Board boardColumns={boards}/>
       </div>
     );
   }
