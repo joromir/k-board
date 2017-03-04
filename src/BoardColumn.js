@@ -9,6 +9,7 @@ export default class BoardColumn extends Component {
 
     this.state = {
       hidden: false,
+      newStoryData: '',
       stories: [
         {id: 1, title: 'Buy notebooks', trash: false},
         {id: 2, title: 'Wash the car', trash: true},
@@ -19,6 +20,9 @@ export default class BoardColumn extends Component {
     this.changeState = this.changeState.bind(this);
     this.refreshStories = this.refreshStories.bind(this);
     this.markStoryAsTrash = this.markStoryAsTrash.bind(this);
+    this.addNewStory = this.addNewStory.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.appendNewStory = this.appendNewStory.bind(this);
   }
 
   changeState() {
@@ -40,12 +44,49 @@ export default class BoardColumn extends Component {
     );
   }
 
+  addNewStory(event) {
+    this.setState({
+      newStoryData: event.target.value
+    });
+  }
+
+  appendNewStory(stories) {
+    var ids = this.state.stories.map((story) => story.id);
+
+    var newStory = {
+      id: (Math.max(...ids) + 1),
+      title: this.state.newStoryData,
+      trash: false
+    };
+
+    return(stories.concat([newStory]));
+  }
+
+  handleSubmit(event) {
+    // TODO: Find a better solution...
+    this.setState((prevState, props) =>
+      {stories: this.appendNewStory(prevState.stories)}
+    );
+    event.preventDefault();
+  }
+
   render() {
     const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
         <div className='well'>
           <h4 className='display-4'>{this.props.boardName}</h4>
           <a onClick={this.changeState} className='btn btn-danger btn-xs'>delete</a>
+          <p>{this.state.newStoryData}</p>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Add new:
+              <input type='text'
+                     placeholder='new story'
+                     className='form-control'
+                     onChange={this.addNewStory}/>
+            </label>
+            <input type='submit' value='Submit' className='btn btn-info btn-xs'/>
+          </form>
         </div>
 
         <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
