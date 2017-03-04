@@ -12,9 +12,9 @@ export default class TrashedBoardStory extends Component {
   }
 
   render() {
-    return <div>
-      {this.props.story.title}
+    return <a className="list-group-item">
+      {this.props.story.title}<br />
       <a className='btn btn-info btn-xs' onClick={this.handleChange}>Restore</a>
-    </div>;
+    </a>;
   }
 }
