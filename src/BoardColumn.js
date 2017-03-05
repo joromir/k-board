@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BoardStory from './BoardStory'
 import TrashedStories from './TrashedStories'
 import ColumnActiveStories from './ColumnActiveStories'
 import BoardColumnHead from './BoardColumnHead'
