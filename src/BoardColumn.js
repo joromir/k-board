@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BoardStory from './BoardStory'
 import TrashedStories from './TrashedStories'
 import ColumnActiveStories from './ColumnActiveStories'
+import BoardColumnHead from './BoardColumnHead'
 
 export default class BoardColumn extends Component {
   constructor(props) {
@@ -18,15 +19,15 @@ export default class BoardColumn extends Component {
       ] 
     };
 
-    this.changeState = this.changeState.bind(this);
     this.refreshStories = this.refreshStories.bind(this);
     this.markStoryAsTrash = this.markStoryAsTrash.bind(this);
     this.addNewStory = this.addNewStory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.appendNewStory = this.appendNewStory.bind(this);
+    this.hideColumn = this.hideColumn.bind(this);
   }
 
-  changeState() {
+  hideColumn() {
     this.setState({hidden: true});
   }
 
@@ -64,32 +65,20 @@ export default class BoardColumn extends Component {
   }
 
   handleSubmit(event) {
-    // TODO: Find a better solution...
-    this.setState((prevState, props) =>
-      {stories: this.appendNewStory(prevState.stories)}
-    );
+    this.setState((prevState, props) => {
+      stories: this.appendNewStory(prevState.stories)
+    });
+
     event.preventDefault();
   }
 
   render() {
     const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
-        <div className='well'>
-          <h4 className='display-4'>{this.props.boardData.name}</h4>
-          <a onClick={this.changeState} className='btn btn-danger btn-xs btn-block'>
-            delete column
-          </a>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Add new:
-              <input type='text'
-                     placeholder='new story'
-                     className='form-control'
-                     onChange={this.addNewStory}/>
-            </label>
-            <input type='submit' value='Submit' className='btn btn-info btn-xs btn-block'/>
-          </form>
-        </div>
+        <BoardColumnHead boardName={this.props.boardData.name}
+                         onSubmit={this.handleSubmit}
+                         onChange={this.addNewStory}
+                         onHide={this.hideColumn}/>
 
         <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
         <hr />
