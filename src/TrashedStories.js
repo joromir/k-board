@@ -9,19 +9,12 @@ export default class TrashedStories extends Component {
     this.showTrash = this.showTrash.bind(this);
     this.handleStoryChange = this.handleStoryChange.bind(this);
     this.determineButton = this.determineButton.bind(this);
-    this.trashedStoriesRaw = this.trashedStoriesRaw.bind(this);
 
     this.state = {trashVisible: false};
   }
 
-  trashedStoriesRaw() {
-    const trash = this.props.stories.filter((story) => story.trash === true);
-
-    return(trash);
-  }
-
   trashedStories() {
-    const trashComponents = this.trashedStoriesRaw().map((story) =>
+    const trashComponents = this.props.stories.map((story) =>
       <TrashedBoardStory key={story.id.toString()}
                          story={story}
                          onChange={this.handleStoryChange}/>)
@@ -44,15 +37,13 @@ export default class TrashedStories extends Component {
   }
 
   determineButton() {
-    var trashedItemsLength = this.props.stories.filter((story) => story.trash === true).length;
-
     var klass = 'btn btn-info btn-block';
 
     return(
-      <button className={trashedItemsLength === 0 ? klass + ' disabled' : klass}
+      <button className={this.props.stories.length === 0 ? klass + ' disabled' : klass}
               onClick={this.showTrash}>
 
-        <span className="badge">{trashedItemsLength}</span> Trash
+        <span className="badge">{this.props.stories.length}</span> Trash
       </button>
     );
   }

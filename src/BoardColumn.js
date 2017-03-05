@@ -80,9 +80,11 @@ export default class BoardColumn extends Component {
                          onChange={this.addNewStory}
                          onHide={this.hideColumn}/>
 
-        <ColumnActiveStories stories={this.state.stories} onChange={this.refreshStories}/>
-        <hr />
-        <TrashedStories stories={this.state.stories} onChange={this.refreshStories}/>
+        <ColumnActiveStories stories={this.state.stories.filter((story) => story.trash === false)}
+                             onChange={this.refreshStories}/>
+
+        <TrashedStories stories={this.state.stories.filter((story) => story.trash === true)}
+                        onChange={this.refreshStories}/>
       </div>
     </div>
 
