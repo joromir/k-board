@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TrashedStories from './TrashedStories'
 import ColumnActiveStories from './ColumnActiveStories'
-import BoardColumnHead from './BoardColumnHead'
+import BoardColumnForm from './BoardColumnForm'
 
 export default class BoardColumn extends Component {
   constructor(props) {
@@ -74,16 +74,19 @@ export default class BoardColumn extends Component {
   render() {
     const content = <div className='col-lg-2'>
       <div className="BoardColumn thumbnail">
-        <BoardColumnHead boardName={this.props.boardData.name}
-                         onSubmit={this.handleSubmit}
-                         onChange={this.addNewStory}
-                         onHide={this.hideColumn}/>
+        <div className='well'>
+          <h4>{this.props.boardData.name}</h4>
+        </div>
 
         <ColumnActiveStories stories={this.state.stories.filter((story) => story.trash === false)}
                              onChange={this.refreshStories}/>
 
         <TrashedStories stories={this.state.stories.filter((story) => story.trash === true)}
                         onChange={this.refreshStories}/>
+
+        <BoardColumnForm onSubmit={this.handleSubmit}
+                         onChange={this.addNewStory}
+                         onHide={this.hideColumn}/>
       </div>
     </div>
 

@@ -17,8 +17,8 @@ export default class Board extends Component {
     alert('TODO: Board handle change');
   }
 
-  createNewColumn(e) {
-    alert('TODO');
+  createNewColumn() {
+    this.props.onChange(this.state.newColumnName);
   }
 
   inputListener(e) {
@@ -31,6 +31,7 @@ export default class Board extends Component {
                    boardData={board}
                    onChange={this.handleChange}/>
     );
+
     return(components);
   }
 
